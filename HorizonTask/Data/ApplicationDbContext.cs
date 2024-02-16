@@ -13,5 +13,6 @@ namespace HorizonTask.Data
         {
 
         }
+        public DbSet<ApplicationTask> Tasks { get; set; }
     }
 }
