@@ -19,7 +19,7 @@ import { TasklistComponent } from './tasklist/tasklist.component';
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    TasklistComponent,
+
     CounterComponent,
     FetchDataComponent
   ],
@@ -27,6 +27,7 @@ import { TasklistComponent } from './tasklist/tasklist.component';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    TasklistComponent,
     ApiAuthorizationModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
