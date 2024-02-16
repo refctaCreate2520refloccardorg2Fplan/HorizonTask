@@ -11,7 +11,7 @@ namespace HorizonTask.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        public TasksController(ApplicationDbContext context)
+        public TaskController(ApplicationDbContext context)
         {
             _context = context;
         }
