@@ -15,7 +15,7 @@ export class TasklistComponent {
   constructor(
     http: HttpClient,
     @Inject("BASE_URL") baseUrl: string) {
-    http.get<TasksDTO[]>(baseUrl + 'Tasks').subscribe(result => { this.TaskData = result; }, error => console.error(error));}
+    http.get<TasksDTO[]>(baseUrl + 'tasks').subscribe(result => { this.TaskData = result; }, error => console.error(error));}
 }
 
 export interface TasksDTO {

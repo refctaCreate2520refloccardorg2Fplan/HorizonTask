@@ -7,11 +7,11 @@ namespace HorizonTask.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class TaskController : ControllerBase
+    public class TasksController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public TaskController(ApplicationDbContext context)
+        public TasksController(ApplicationDbContext context)
         {
             _context = context;
         }
