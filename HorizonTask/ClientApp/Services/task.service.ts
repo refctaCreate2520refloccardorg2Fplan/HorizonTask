@@ -6,22 +6,28 @@ import { TasksDTO } from '../src/app/tasklist/tasklist.component';
 @Injectable({
   providedIn: 'root'
 })
+
 export class TaskService {
   controls: any;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
 
-  createTask(Data: TaskForm) {
-    return this.http.put<TasksDTO>(this.baseUrl + 'tasklist/createTask', Data);
+  createTask(Data: CreateTaskDTO) {
+    return this.http.put<CreateTaskDTO>(this.baseUrl + 'tasklist/createTask', Data);
   }
 }
 
 
-interface TaskForm {
-  id: number;
+export interface CreateTaskDTO {
+  taskName: string;
+  taskDescription: string;
+  taskPriority: number;
+}
+
+/* 
+export interface TaskForm {
   name: string;
   description: string;
   priority: number;
-  isDone: boolean;
-  deadline: Date;
 }
+*/

@@ -31,5 +31,21 @@ namespace HorizonTask.Controllers
             );
         }
 
+        [HttpPut]
+        [Route("createTask")]
+
+        public CreateTaskDTO createNewTask(CreateTaskDTO task)
+        {
+            var taskCreate = new ApplicationTask()
+            {
+                Name = task.Name,
+                Description = task.Description,
+                Priority = task.Priority,
+            };
+            _context.Add(taskCreate);
+            _context.SaveChanges();
+            return task;
+        }
+
     }
 }

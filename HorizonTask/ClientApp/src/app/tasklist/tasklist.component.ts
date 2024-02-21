@@ -2,7 +2,7 @@ import { NgFor } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, signal, Injectable } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, FormsModule, Validators } from '@angular/forms';
-import { TaskService } from 'Services/task.service';
+import { TaskService, CreateTaskDTO } from 'Services/task.service';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -17,21 +17,24 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class TasklistComponent {
 
+
+
   /*Task: string = "no data";
     Description: string = "no data";
     Priority: number = 0;*/
 
-  form = new FormControl('');
-  taskForm = new FormGroup({
-  Task: new FormControl(''),
-  Description: new FormControl(''),
-  Priority: new FormControl('')
+ // form = new FormControl('');
+  taskForm = new FormGroup(
+    {
+      taskName: new FormControl(''),
+      taskDescription: new FormControl(''),
+      taskPriority: new FormControl('')
   })
 
 
   private destroy$ = new Subject<void>();
   public TaskData: TasksDTO[] = [];
-  newTask = signal<TasksDTO>(undefined);
+ // newTask = signal<TasksDTO>(undefined);
 
   constructor(
     private route: ActivatedRoute, http: HttpClient,
@@ -41,17 +44,31 @@ export class TasklistComponent {
     http.get<TasksDTO[]>(baseUrl + 'tasks').subscribe(result => { this.TaskData = result; }, error => console.error(error));
 
   }
+
+  taskName: string = "no data";
+  taskDescription: string = "no data";
+  taskPriority: number = 0;
+
   onAddTask() {
-    if (this.form.valid) {
-      this.taskForm.createTask({
+    if (this.taskForm.valid) {
+      this.taskService.createTask({
+        taskName: this.taskForm.controls['taskName'].value,
+        taskDescription: this.taskForm.controls['taskDescription'].value,
+        taskPriority: this.taskForm.controls['taskPriority'].value
+      }
+      )
+
+  }
+  }
+
+  /*      this.taskForm.createTask({
         Task: this.taskForm.controls['Task'].value,
         Description: this.taskForm.controls['Description'].value,
         Priority: this.taskForm.controls['Priority'].value
 
-      }).pipe(takeUntil(this.destroy$)).subscribe(Tas => { this.newTask.set(guildDetail); });
-    }
-  }
-}
+      }).subscribe();  //.pipe(takeUntil(this.destroy$)).subscribe( => { this.newTask.set(guildDetail); });
+ */
+} 
 
 export interface TasksDTO {
   id: number;
@@ -59,5 +76,4 @@ export interface TasksDTO {
   description: string;
   priority: number;
   isDone: boolean;
-  deadline: Date;
 }
