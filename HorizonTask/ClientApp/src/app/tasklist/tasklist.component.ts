@@ -18,12 +18,6 @@ import { Subject, takeUntil } from 'rxjs';
 export class TasklistComponent {
 
 
-
-  /*Task: string = "no data";
-    Description: string = "no data";
-    Priority: number = 0;*/
-
- // form = new FormControl('');
   taskForm = new FormGroup(
     {
       taskName: new FormControl(''),
@@ -52,22 +46,14 @@ export class TasklistComponent {
   onAddTask() {
     if (this.taskForm.valid) {
       this.taskService.createTask({
-        taskName: this.taskForm.controls['taskName'].value,
-        taskDescription: this.taskForm.controls['taskDescription'].value,
-        taskPriority: this.taskForm.controls['taskPriority'].value
+        taskName: this.taskService.controls['taskName'].value,
+        taskDescription: this.taskService.controls['taskDescription'].value,
+        taskPriority: this.taskService.controls['taskPriority'].value
       }
       ).subscribe();
-
   }
   }
 
-  /*      this.taskForm.createTask({
-        Task: this.taskForm.controls['Task'].value,
-        Description: this.taskForm.controls['Description'].value,
-        Priority: this.taskForm.controls['Priority'].value
-
-      }).subscribe();  //.pipe(takeUntil(this.destroy$)).subscribe( => { this.newTask.set(guildDetail); });
- */
 } 
 
 export interface TasksDTO {
