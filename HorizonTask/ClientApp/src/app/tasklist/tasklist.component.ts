@@ -56,7 +56,7 @@ export class TasklistComponent {
         taskDescription: this.taskForm.controls['taskDescription'].value,
         taskPriority: this.taskForm.controls['taskPriority'].value
       }
-      )
+      ).subscribe();
 
   }
   }
