@@ -8,13 +8,12 @@ import { TasksDTO } from '../src/app/tasklist/tasklist.component';
 })
 
 export class TaskService {
-  controls: any;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
 
-  createTask(Data: CreateTaskDTO) {
-    return this.http.put<CreateTaskDTO>(this.baseUrl + 'tasklist/createTask', Data);
-  }
+  createTask(Task: CreateTaskDTO) {
+    return this.http.put<CreateTaskDTO>(this.baseUrl + 'tasklist/createTask', Task);
+  };
 }
 
 
@@ -24,10 +23,3 @@ export interface CreateTaskDTO {
   taskPriority: number;
 }
 
-/* 
-export interface TaskForm {
-  name: string;
-  description: string;
-  priority: number;
-}
-*/

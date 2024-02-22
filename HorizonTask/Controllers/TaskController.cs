@@ -38,9 +38,9 @@ namespace HorizonTask.Controllers
         {
             var taskCreate = new ApplicationTask()
             {
-                Name = task.Name,
-                Description = task.Description,
-                Priority = task.Priority,
+                Name = task.taskName,
+                Description = task.taskDescription,
+                Priority = task.taskPriority,
             };
             _context.Add(taskCreate);
             _context.SaveChanges();

@@ -16,19 +16,7 @@ import { Subject, takeUntil } from 'rxjs';
 
 })
 export class TasklistComponent {
-
-
-  taskForm = new FormGroup(
-    {
-      taskName: new FormControl(''),
-      taskDescription: new FormControl(''),
-      taskPriority: new FormControl('')
-  })
-
-
-  private destroy$ = new Subject<void>();
-  public TaskData: TasksDTO[] = [];
- // newTask = signal<TasksDTO>(undefined);
+  taskINFO = signal<CreateTaskDTO>(undefined);
 
   constructor(
     private route: ActivatedRoute, http: HttpClient,
@@ -36,21 +24,31 @@ export class TasklistComponent {
     private taskService: TaskService,
     @Inject("BASE_URL") baseUrl: string) {
     http.get<TasksDTO[]>(baseUrl + 'tasks').subscribe(result => { this.TaskData = result; }, error => console.error(error));
-
   }
 
   taskName: string = "no data";
   taskDescription: string = "no data";
   taskPriority: number = 0;
 
+  taskForm = new FormGroup(
+    {
+      name: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required),
+      priority: new FormControl(null, Validators.required),
+  })
+
+
+
+  public TaskData: TasksDTO[] = [];
+ // newTask = signal<TasksDTO>(undefined);
+
   onAddTask() {
     if (this.taskForm.valid) {
       this.taskService.createTask({
-        taskName: this.taskService.controls['taskName'].value,
-        taskDescription: this.taskService.controls['taskDescription'].value,
-        taskPriority: this.taskService.controls['taskPriority'].value
-      }
-      ).subscribe();
+        taskName: this.taskForm.controls['name'].value,
+        taskDescription: this.taskForm.controls['description'].value,
+        taskPriority: this.taskForm.controls['priority'].value,
+      }).subscribe();
   }
   }
 

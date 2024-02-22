@@ -2,8 +2,8 @@
 {
     public class CreateTaskDTO
     {
-        public string taskName { get; set; }
-        public string? taskDescription { get; set; }
-        public int taskPriority { get; set; }
+        public string taskName { get; set; } = default!;
+        public string taskDescription { get; set; } = default!;
+        public int taskPriority { get; set; } = default!;
     }
 }
